@@ -1,0 +1,252 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <link href = "/styles.css" rel="stylesheet">
+    <script>
+       function handleEmail(evt) {
+        const value = evt.target.value
+        const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+        
+        if (emailRegex.test(value.trim())) {
+            evt.target.classList.add('valid')
+            evt.target.classList.remove('invalid')
+        } else {
+            evt.target.classList.add('invalid')
+            evt.target.classList.remove('valid')
+        }
+
+        if (!value) {
+            evt.target.classList.remove('invalid')
+        }
+    }
+    function handleData(event,mobileRegex) {
+        const value = event.target.value
+        //const mobileRegex =/^[6-9]\d{9}$/;
+        console.log(value)
+         
+        if (mobileRegex.test(value.trim())) {
+            event.target.classList.add('valid')
+            event.target.classList.remove('invalid')
+        } else {
+            event.target.classList.add('invalid')
+            event.target.classList.remove('valid')
+        }
+
+        if (!value) {
+            event.target.classList.remove('invalid')
+        }
+    }
+     function handleMobile(event,mobileRegex) {
+        const value = event.target.value
+        //const mobileRegex =/^[6-9]\d{9}$/;
+       
+         
+        if (mobileRegex.test(value.trim())) {
+            event.target.classList.add('valid')
+            event.target.classList.remove('invalid')
+        } else {
+            event.target.classList.add('invalid')
+            event.target.classList.remove('valid')
+        }
+
+        if (!value) {
+            event.target.classList.remove('invalid')
+        }
+      
+        if(event.target.classList[2]=="valid"){
+     	window.location.replace("http://localhost:8080/email/"+value);  
+        }
+     
+	   
+    }
+    
+     
+    </script>
+</head>
+<body>
+    <div class="container ">
+    <form>  <!--th:action="@{/email/}" th:object="${user}" method="post">-->
+     <!--MOBILE/PHONE-->
+    <h1 class="display-4">Mobile/Phone</h1>
+
+        <div class="form row p-2 ">
+          <!--Mobile Input-->
+          <div class = "form form-control-lg form-group col-3">
+          <label for="mobile">Mobile</label>
+          <div class="con-input">
+            
+            <input class="form-control form-control-lg" oninput="handleMobile(event,/^[6-9]\d{9}$/)" placeholder="Mobile" type="text" th:value="${mobile}">
+            <div class="icons">
+              <i class='bx bxs-check-circle check' ></i>
+              <i class='bx bxs-x-circle x' ></i>
+            </div>
+            </div>
+          </div>
+             <!--Phone Input-->  
+          <div class = "form form-control-lg form-group col-3">
+          <label for="phone">Phone</label>
+          <div class="con-input">
+            
+            <input class="form-control form-control-lg" oninput="handleData(event,/^[6-9]\d{9}$/)" placeholder="Phone" type="text" th:value="${phone}">
+            <div class="icons">
+              <i class='bx bxs-check-circle check' ></i>
+              <i class='bx bxs-x-circle x' ></i>
+            </div>           
+          </div>
+          </div>
+          <!--Email Input-->
+          <div class = "form form-control-lg form-group col-5">
+          <label class="form-label" for="form3Example3">Email</label>
+          <div class="con-input">
+           
+            <input class="form-control form-control-lg" oninput="handleEmail(event)" placeholder="Email" type="text" th:value="${email}">
+            <div class="icons">
+              <i class='bx bxs-check-circle check' ></i>
+              <i class='bx bxs-x-circle x' ></i>
+            </div>
+           
+          </div>
+          </div>
+         
+                                             
+    </div>
+
+    <hr style="height:2px;border-width:0;color:#0275d8;background-color:#0275d8">
+      <!--DETAILS-->
+      <h1 class="display-4">Details</h1>
+
+        <div class="form row p-2 ">
+          <div class="form-group col-3">
+            <label for="formNumber">Form Number</label>
+            <input type="text" class="form-control" id="formNumber" placeholder="Enter" th:value=${formid}>
+          </div>
+          <div class="form-group col-4">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" id="Name" placeholder="Enter" th:value="${name}">
+          </div>
+          <div class="form-group col-4">
+            <label for="FatherName">Father's Name</label>
+            <input type="text" class="form-control" id="FatherName" placeholder="Enter" th:value="${fathername}">
+          </div>
+
+          <div class="form-group col-4">
+              <label for="inputDate">Date of Birth</label>
+              <input type="date" class="form-control" id="inputDate" th:value=${dob}>
+          </div>
+                
+          <div class="form-group col-4">
+            <label for="Gender">Gender</label>
+            <input type="text" class="form-control" id="Gender" placeholder="Enter" th:value="${gender}">
+          </div>
+          
+          <div class="form-group col-4">
+            <label for="NomineeName">Nominee's Name</label>
+            <input  type="text" class="form-control" id="NomineeName" placeholder="Enter" th:value="${nomineename}">
+          </div>
+          <div class="form-group col-5 offset-xl-4">
+            <label for="Relationship">Relationship with Nominee</label>
+            <input type="text" class="form-control" id="Relationship" placeholder="Enter" th:value="${relationship}">
+          </div>
+     
+    
+                                             
+    </div>
+   
+    <hr style="height:2px;border-width:0;color:#0275d8;background-color:#0275d8">
+    
+    <!--ADDRESS-->
+         
+      <h1 class="display-4">Address</h1>
+
+      <div class="form row p-2 ">
+        <div class="form-group col-3">
+          <label for="HNo">House No.</label>
+          <input  type="text" class="form-control" id="HNo" placeholder="Enter" th:value="${houseNumber}">
+        </div>
+        <div class="form-group col-4">
+          <label for="Locality">Locality</label>
+          <input type="text" class="form-control" id="Locality" placeholder="Enter" th:value="${locality}">
+        </div>
+        <div class="form-group col-4">
+          <label for="Street">Street</label>
+          <input type="text" class="form-control" id="Street" placeholder="Enter" th:value="${street}">
+        </div>
+        <div class="form-group col-4 offset-xl-1">
+          <label for="Landmark">Landmark</label>
+          <input  type="text" class="form-control" id="Landmark" placeholder="Enter" th:value="${landmark}">
+        </div>
+        <div class = "form form-control-lg form-group col-4 offset-xl-1">
+          <label for="pin">PIN</label>
+          <div class="con-input">
+            
+            <input th:value="${pin}" class="form-control form-control-lg" oninput="handleData(event,/^\d{6}$/)" placeholder="PIN" type="text">
+            <div class="icons">
+              <i class='bx bxs-check-circle check' ></i>
+              <i class='bx bxs-x-circle x' ></i>
+            </div>           
+          </div>
+          </div>
+
+
+
+          <br/>
+          <br/>
+          
+                                           
+      </div>
+
+      <div class="form row p-2 ">
+        <div class="form-group">
+        <div class="form-group col-1 offset-xl-4">
+          
+            <input type="submit" class="btn btn-primary" role="button"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Save">
+            
+          
+        </div>
+          
+          
+        </div>
+
+      </div>
+      <div class="form row p-2 ">
+        <!--PROFILE , HABITS , PAYMENT BUTTON-->
+        <div class="form-group col-4 ">
+          <a th:href = "@{/email/profile}">
+            <input class="fbutton" role="button"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Profile">
+            </a>
+          
+        </div>
+        <div class="form-group col-4 ">
+          <a th:href = "@{/email/habits}">
+            <input class="fbutton" role="button"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Habits">
+            </a>
+          
+        </div>
+        <div class="form-group col-4 ">
+          <a th:href = "@{/email/payment}">
+            <input class="fbutton" role="button"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Payment">
+            </a>
+          
+        </div>
+
+      </div>
+
+ 
+      </form>
+    </div>
+
+</body>
+</html>
